@@ -8,7 +8,6 @@ public class PersonService {
         Persons person = new Persons();
         person.setName("John Doe");
         person.setLastName("Gonzales");
-        person.setWeight(60);
         return person;
     }
 }

@@ -4,15 +4,14 @@ public class Persons {
 
     private String name;
     private String lastName;
-    private int weight;
 
     public Persons() {
     }
 
-    public Persons(String name, String lastName, int weight) {
+    public Persons(String name, String lastName) {
         this.name = name;
         this.lastName = lastName;
-        this.weight = weight;
+
     }
 
     public String getName() {
@@ -30,13 +29,4 @@ public class Persons {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    public int getWeight() {
-        return this.weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
 }
