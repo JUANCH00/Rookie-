@@ -27,8 +27,9 @@ public class messsageController {
     @GetMapping("/saludos")
     public String getMessager() {
         UptcList<Persons> uptcList = new UptcList();
-
+        Persons x = new Persons();
         Persons p = new Persons();
+
         p.setName("Juanito");
         p.setLastName("Perez");
         uptcList.add(p);
@@ -36,10 +37,39 @@ public class messsageController {
         p = new Persons();
         p.setName("Benito");
         p.setLastName("Martine");
-
         uptcList.add(p);
-        uptcList.remove();
+
+        p = new Persons();
+        p.setName("Miguel");
+        p.setLastName("Martinez");
+        uptcList.add(p);
+
+        System.out.println("El indice de " + p.getName() + " es: " + uptcList.indexOf(p));
         showInfo(uptcList);
+
+        System.out.println("-------------");
+        System.out.println(uptcList.size());
+        System.out.println("-------------");
+
+        p = new Persons();
+        p.setName("Steve");
+        p.setLastName("Ramire");
+        uptcList.add(1, p);
+        showInfo(uptcList);
+
+        System.out.println("-------------");
+        System.out.println(uptcList.size());
+        System.out.println("El indice de " + p.getName() + " es: " + uptcList.indexOf(p));
+        System.out.println("-------------");
+
+        p = new Persons();
+        p.setName("Steve");
+        p.setLastName("Ramire");
+        uptcList.add(p);
+        showInfo(uptcList);
+        System.out.println("El ultimo indice de la lista de:  " + p.getName() + " es: " + uptcList.lastIndexOf(p));
+        System.out.println("-------------");
+
         return "Hola Mundo";
 
     }

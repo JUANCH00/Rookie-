@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("nodo")
 public class Nodo<T> {
     private T info;
-    private Nodo next;
+    private Nodo<T> next;
 
     // Contructor
     public Nodo() {
+        next = null;
     }
 
     public Nodo(T info, Nodo next) {
