@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 public class UptcList<T> implements List<T> {
     private Nodo<T> header = null;
@@ -72,14 +73,18 @@ public class UptcList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new MyIterator();
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        Nodo<T> aux = header;
+        Object[] array = new Object[size()];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = aux.getInfo();
+            aux = aux.getNext();
+        }
+        return array;
     }
 
     @Override
@@ -211,17 +216,13 @@ public class UptcList<T> implements List<T> {
     @Override
     public int lastIndexOf(Object o) {
         Nodo<T> aux = header;
-        Nodo<T> temp = new Nodo<>();
         int cont = 0;
-        int index = 0;
         try {
             do {
-                if (aux.getInfo().equals(o)) {
-                    temp = aux;
-                    index = cont;
+                if (!aux.getInfo().equals(o)) {
+                    aux = aux.getNext();
                 }
-                aux = aux.getNext();
-                cont += 1;
+                cont++;
             } while (aux.getNext() != null);
         } catch (NullPointerException e) {
             System.out.println("El objeto no existe");
@@ -231,8 +232,7 @@ public class UptcList<T> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listIterator'");
+        return new MyListIterator();
     }
 
     @Override
@@ -248,7 +248,7 @@ public class UptcList<T> implements List<T> {
     }
 
     // Actividad 1
-    private Nodo findNode(int index) {
+    private Nodo<T> findNode(int index) {
         Nodo<T> aux = header;
         Nodo<T> temp = new Nodo<>();
         for (int i = 0; i < index; i++) {
@@ -260,7 +260,7 @@ public class UptcList<T> implements List<T> {
         return temp;
     }
 
-    private Nodo findNode(Object object) {
+    private Nodo<T> findNode(Object object) {
         Nodo<T> aux = header;
         boolean flag = false;
         while (aux != null && flag != true) {
@@ -273,21 +273,109 @@ public class UptcList<T> implements List<T> {
         return aux;
     }
 
-    /*
-     * public int indexOf(Object object) {
-     * 
-     * }
-     * public int lastIndexOf(Object object) {
-     * 
-     * }
-     */
-
     public Object next() {
         throw new UnsupportedOperationException("Unimplemented method 'subList'");
     }
 
     public Object previous() {
         throw new UnsupportedOperationException("Unimplemented method 'subList'");
+    }
+
+    private class MyIterator implements Iterator<T> {
+        private int index;
+        private Nodo<T> temp;
+
+        public MyIterator() {
+            index = 0;
+            temp = header;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < size() - 1;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T element = (T) temp.getInfo();
+            temp = temp.getNext();
+            index++;
+            return element;
+        }
+    }
+
+    private class MyListIterator implements ListIterator<T> {
+        private int index;
+        private Nodo<T> temp;
+
+        public MyListIterator() {
+            index = 0;
+            temp = header;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < size() - 1;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            T element = (T) temp.getInfo();
+            temp = temp.getNext();
+            index++;
+            return element;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return index > 0;
+        }
+
+        @Override
+        public T previous() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'previous'");
+        }
+
+        @Override
+        public int nextIndex() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'nextIndex'");
+        }
+
+        @Override
+        public int previousIndex() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'previousIndex'");
+        }
+
+        @Override
+        public void remove() {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        }
+
+        @Override
+        public void set(T e) {
+            if (temp != null) {
+                temp.setInfo(e);
+            } else {
+                throw new IllegalStateException();
+            }
+        }
+
+        @Override
+        public void add(T e) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'add'");
+        }
+
     }
 
 }

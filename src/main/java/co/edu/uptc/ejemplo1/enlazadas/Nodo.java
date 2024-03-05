@@ -1,11 +1,5 @@
 package co.edu.uptc.ejemplo1.enlazadas;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController
-@RequestMapping("nodo")
 public class Nodo<T> {
     private T info;
     private Nodo<T> next;
@@ -15,14 +9,9 @@ public class Nodo<T> {
         next = null;
     }
 
-    public Nodo(T info, Nodo next) {
+    public Nodo(T info, Nodo<T> next) {
         this.info = info;
         this.next = next;
-    }
-
-    @GetMapping("/info")
-    public void add() {
-
     }
 
     // Getters and Setters
@@ -34,11 +23,11 @@ public class Nodo<T> {
         this.info = info;
     }
 
-    public Nodo getNext() {
+    public Nodo<T> getNext() {
         return this.next;
     }
 
-    public void setNext(Nodo next) {
+    public void setNext(Nodo<T> next) {
         this.next = next;
     }
 
