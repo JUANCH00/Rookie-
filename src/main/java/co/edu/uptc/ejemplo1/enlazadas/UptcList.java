@@ -150,8 +150,12 @@ public class UptcList<T> implements List<T> {
 
     @Override
     public T set(int index, T element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
+        Nodo<T> oldData = findNode(index);
+        Nodo<T> actual = findNode(index);
+        actual.setInfo(element);
+        oldData = actual;
+        return oldData.getInfo();
+
     }
 
     @Override
@@ -292,13 +296,13 @@ public class UptcList<T> implements List<T> {
 
         @Override
         public boolean hasNext() {
-            return index < size() - 1;
+            return index < size();
         }
 
         @Override
         public T next() {
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("No hay más elementos");
             }
             T element = (T) temp.getInfo();
             temp = temp.getNext();
@@ -318,17 +322,18 @@ public class UptcList<T> implements List<T> {
 
         @Override
         public boolean hasNext() {
-            return index < size() - 1;
+            return index < size();
         }
 
         @Override
         public T next() {
+            T element;
             if (!hasNext()) {
-                throw new NoSuchElementException();
+                throw new NoSuchElementException("No hay más elementos");
+            } else {
+                index++;
+                element = get(index);
             }
-            T element = (T) temp.getInfo();
-            temp = temp.getNext();
-            index++;
             return element;
         }
 
@@ -363,11 +368,9 @@ public class UptcList<T> implements List<T> {
 
         @Override
         public void set(T e) {
-            if (temp != null) {
-                temp.setInfo(e);
-            } else {
-                throw new IllegalStateException();
-            }
+            Nodo<T> aux = new Nodo<>();
+            aux.setInfo(e);
+            index = indexOf(aux);
         }
 
         @Override

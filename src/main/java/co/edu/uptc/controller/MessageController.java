@@ -36,7 +36,8 @@ public class MessageController {
     public void showInfo(UptcList<Persons> list) {
         for (Persons persons : list) {
             System.out.println(persons.getName());
-            System.out.println(persons.getLastName() + "\n");
+            System.out.println(persons.getLastName());
+            System.out.println(persons.getBirthData() + "\n");
         }
     }
 

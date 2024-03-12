@@ -1,5 +1,7 @@
 package co.edu.uptc.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 
 import co.edu.uptc.ejemplo1.enlazadas.UptcList;
@@ -15,41 +17,37 @@ public class PeopleService {
     public UptcList<Persons> createPeople() {
 
         Persons person = new Persons();
-        person.setName("Juan");
-        person.setLastName("Martine");
-        person.setAge(25);
+        person.setName("BJuan");
+        person.setLastName("XMartine");
         person.setAddres(null);
         person.setGender(null);
+        person.setBirthData(LocalDate.of(1990, 12, 1));
         people.add(person);
 
         person = new Persons();
         person.setName("ARaul");
-        person.setLastName("Ramire");
-        person.setAge(34);
+        person.setLastName("BRamire");
         person.setAddres(null);
         person.setGender(null);
         people.add(person);
 
         person = new Persons();
-        person.setName("Sebastian");
-        person.setLastName("Ramire");
-        person.setAge(34);
+        person.setName("CSebastian");
+        person.setLastName("ARamire");
         person.setAddres(null);
         person.setGender(null);
         people.add(person);
 
         person = new Persons();
-        person.setName("Camila");
-        person.setLastName("Ramire");
-        person.setAge(34);
+        person.setName("ECamila");
+        person.setLastName("RRamire");
         person.setAddres(null);
         person.setGender(null);
         people.add(person);
 
         person = new Persons();
-        person.setName("Laura");
-        person.setLastName("Ramire");
-        person.setAge(34);
+        person.setName("DLaura");
+        person.setLastName("SRamire");
         person.setAddres(null);
         person.setGender(null);
         people.add(person);
